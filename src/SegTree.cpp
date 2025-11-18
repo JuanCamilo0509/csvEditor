@@ -37,13 +37,20 @@ void SegTree::preOrderTraverseHelper(ostream &os, SegNode *current) {
   preOrderTraverseHelper(os, current->right);
 };
 
+int SegTree::neutral() {
+  if (operation == "MIN")
+    return 1e9;
+  else
+    return 0;
+}
+
 int SegTree::query(SegNode *current, Range currentRange) {
   if (!current)
-    return 0;
+    return neutral();
 
   Range intersection = current->range & currentRange;
   if (intersection.isEmpty())
-    return 0;
+    return neutral();
 
   // Si el rango actual está completamente dentro del pedido
   if (current->range.start >= currentRange.start &&

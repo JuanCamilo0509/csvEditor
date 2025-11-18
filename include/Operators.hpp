@@ -29,7 +29,6 @@ unordered_map<string, Operator> ops = {
       [](const vector<string> &args) {
         return to_string(stod(args[0]) / stod(args[1]));
       }}},
-
     {"MAX",
      {1,
       [](const vector<string> &args) {
@@ -43,16 +42,16 @@ unordered_map<string, Operator> ops = {
         tree.arr2Tree(data, data.size());
         return to_string(tree(range));
       }}},
-    // BUG: MIN(X[4, 7])
     {"MIN",
      {1,
       [](const vector<string> &args) {
         Range range(args[0]);
         csvReader csvReader("../dataSet/testData.csv");
         csvReader.readCsv();
+        string columnName = args[0].substr(0, args[0].find('['));
+        vector<double> data = csvReader.getColumn(columnName);
         SegTree tree;
         tree.setOperation("MIN");
-        vector<double> data = csvReader.getColumn(0);
         tree.arr2Tree(data, data.size());
         return to_string(tree(range));
       }}},
@@ -62,9 +61,11 @@ unordered_map<string, Operator> ops = {
         Range range(args[0]);
         csvReader csvReader("../dataSet/testData.csv");
         csvReader.readCsv();
+        string columnName = args[0].substr(0, args[0].find('['));
+        vector<double> data = csvReader.getColumn(columnName);
         SegTree tree;
         tree.setOperation("SUM");
-        tree.arr2Tree(csvReader.getColumn(0), csvReader.getColumn(0).size());
+        tree.arr2Tree(data, data.size());
         return to_string(tree(range));
       }}},
 };

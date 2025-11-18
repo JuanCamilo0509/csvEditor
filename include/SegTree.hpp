@@ -24,6 +24,7 @@ private:
   SegNode *buildTree(vector<double>, Range range);
   void preOrderTraverseHelper(ostream &os, SegNode *current);
   int query(SegNode *current, Range currentRange);
+  int neutral();
 
 public:
   SegNode *root;
