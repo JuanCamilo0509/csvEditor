@@ -119,7 +119,7 @@ void Expression::transformExpressionRPN() {
   }
 }
 
-double Expression::evaluateRPNExpression() {
+double Expression::evaluateRPNExpression(DataBase data) {
   stack<string> numbers;
 
   for (string unit : RPNExpression) {
@@ -134,7 +134,7 @@ double Expression::evaluateRPNExpression() {
         numbers.pop();
       }
       reverse(arguments.begin(), arguments.end());
-      string result = op.impl(arguments);
+      string result = op.impl(arguments, data);
       numbers.push(result);
     }
   }
@@ -142,7 +142,7 @@ double Expression::evaluateRPNExpression() {
   return stod(numbers.top());
 }
 
-double Expression::calculate() {
+double Expression::calculate(DataBase data) {
   transformExpressionRPN();
-  return evaluateRPNExpression();
+  return evaluateRPNExpression(data);
 }

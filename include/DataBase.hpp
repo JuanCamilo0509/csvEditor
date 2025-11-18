@@ -1,3 +1,4 @@
+#pragma once
 #include <cstdio>
 #include <fstream>
 #include <iostream>
@@ -16,14 +17,14 @@ public:
   vector<string> headers;
 };
 
-class csvReader {
-  string path;
+class DataBase {
   Headers headers;
   vector<dataColumn> columns;
   void setHeaders();
 
 public:
-  csvReader(string path) : path(path) {
+  string path;
+  DataBase(string path) : path(path) {
     setHeaders();
     columns.resize(headers.count);
   };

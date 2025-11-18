@@ -1,12 +1,11 @@
 // Code adaptation by Juan Camilo from KnightChaser.
 // Original code:
 // https://gist.github.com/KnightChaser/24af1305e9c0909280beec58e1051845
-#ifndef RPN_HPP
-#define RPN_HPP
-
+#pragma once
 #include <iostream>
 #include <stack>
 #include <string>
+#include "DataBase.hpp"
 
 #include <algorithm>
 #include <vector>
@@ -30,11 +29,9 @@ public:
   vector<string> disassembledExpression;
   vector<string> RPNExpression;
   Expression(string expression) : expression(expression) {};
-  double calculate();
-  double evaluateRPNExpression();
+  double calculate(DataBase data);
+  double evaluateRPNExpression(DataBase data);
   void disassembleExpression();
   void transformExpressionRPN();
   int operatorPriority(char ch);
 };
-
-#endif

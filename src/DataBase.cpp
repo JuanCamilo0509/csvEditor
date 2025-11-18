@@ -1,6 +1,6 @@
-#include "CsvReader.hpp"
+#include "DataBase.hpp"
 
-void csvReader::setHeaders() {
+void DataBase::setHeaders() {
   ifstream file(path);
   string line;
   if (file.is_open()) {
@@ -19,7 +19,7 @@ void csvReader::setHeaders() {
   };
 };
 
-vector<double> csvReader::getColumn(string columnName) {
+vector<double> DataBase::getColumn(string columnName) {
   for (int i = 0; i < headers.count; i++) {
     if (headers.headers[i] == columnName)
       return columns[i].data;
@@ -27,9 +27,9 @@ vector<double> csvReader::getColumn(string columnName) {
   throw std::invalid_argument("The column name doesn't exist");
 };
 
-Headers csvReader::getHeaders() { return headers; }
+Headers DataBase::getHeaders() { return headers; }
 
-void csvReader::readCsv() {
+void DataBase::readCsv() {
   ifstream file(path);
   string line;
   // Saltar headers
