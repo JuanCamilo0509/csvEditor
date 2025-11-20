@@ -62,7 +62,7 @@ unordered_map<string, Operator> ops = {
         data.readCsv();
         vector<double> column = data.getColumn(columnName);
         SegTree tree;
-        tree.setOperation("MIN");
+        tree.setOperation("SUM");
         tree.arr2Tree(column, column.size());
         return to_string(tree(range));
       }}},
