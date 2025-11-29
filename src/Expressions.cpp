@@ -16,13 +16,12 @@ int Expression::operatorPriority(char ch) {
 void Expression::disassembleExpression() {
   // BUG: Decimal points not allow.
   // BUG: Negative number not allow.
-  // Disassemble each number and operator from the given expression.
   string numberRangeStringBuffer;
   string alphaStringBuffer;
 
   for (char ch : expression) {
     if (isdigit(ch) || ch == ',')
-      if (!alphaStringBuffer.empty() && alphaStringBuffer[1] == '[')
+      if (!alphaStringBuffer.empty() && (alphaStringBuffer.find('[') != string::npos))
         alphaStringBuffer.push_back(ch);
       else
         numberRangeStringBuffer.push_back(ch);
@@ -123,7 +122,7 @@ double Expression::evaluateRPNExpression(DataBase data) {
   stack<string> numbers;
 
   for (string unit : RPNExpression) {
-    if (isdigit(unit[0]) || unit[1] == '[') {
+    if (isdigit(unit[0]) || (unit.find('[') != string::npos)) {
       // If unit is a number, put to the number stack
       numbers.push(unit);
     } else if (ops.find(unit) != ops.end()) {
